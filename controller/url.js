@@ -29,7 +29,9 @@ const GenerateShortUrl= async (req,res)=>{
         short_url: ShortID,
         redirect_url: body.url
     })
- res.status(201).json({short_url: {ShortID}})
+
+    const allurl = await URL.find({})
+    return res.render("home", {short_url: ShortID, urls:allurl})
 }
 
 module.exports = { GenerateShortUrl}

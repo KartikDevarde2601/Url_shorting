@@ -1,4 +1,4 @@
-import URL from '../model/URL';
+const {URL} = require('../model/url')
 
 const getRedirect = async (req, res) => {
     const shortUrl = req.params.shortUrl;

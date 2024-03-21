@@ -1,3 +1,4 @@
+const {URL} = require('../model/url')
 
 const getAnalytics = async (req, res) => {
     const shortUrl = req.params.shortUrl;
@@ -9,3 +10,5 @@ const getAnalytics = async (req, res) => {
     }
     res.json({Numbervisit: entry.visitHistory.length});
 }
+
+module.exports = {getAnalytics}
