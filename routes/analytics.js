@@ -1,6 +1,4 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/',GenerateShortUrl);
-
-module.exports = router;
+router.get('/:shortUrl',getAnalytics);

@@ -1,35 +1,17 @@
 const express = require('express');
 const app = express();
-const urlRoutes = require('./routes/url');
+const UrlRoutes = require('./routes/url');
+const RedirectRoutes = require('./routes/redirect');
+const AnalyticsRoutes = require('./routes/analytics');
 const connect = require('./connect');
-const { URL } = require('./model/url');
 
-app.get('/:shortUrl', async (req, res) => {
-    const shortUrl = req.params.shortUrl;
-   const entry  = await URL.findOneAndUpdate({
-        short_url: shortUrl
-    },{$push: {visitHistory: {timestamp: Date.now()}}});
-    if (!entry){
-        return res.status(404).json({msg: 'URL not found'});
-    }
-
-    res.redirect(entry.redirect_url);
-});
-
-app.get('/api/v1/analytics/:shortUrl', async (req, res) => {
-  const shortUrl = req.params.shortUrl;
-    const entry = await URL.findOne({
-        short_url: shortUrl
-    });
-    if (!entry){
-        return res.status(404).json({msg: 'URL not found'});
-    }
-    res.json({Numbervisit: entry.visitHistory.length});
-});
 
 connect();
 app.use(express.json());
-app.use('/api/v1/url', urlRoutes);
+
+app.use('/api/v1/url', UrlRoutes);
+app.use('api/vi/redirect', RedirectRoutes);
+app.use('/api/v1/analytics', AnalyticsRoutes);
 
 
 
