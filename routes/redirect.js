@@ -4,4 +4,4 @@ const {getRedirect} = require('../controller/redirect')
 
 router.get('/:shortUrl',getRedirect);
 
-module.exports = router;
+module.exports =router;

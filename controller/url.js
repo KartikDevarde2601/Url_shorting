@@ -27,7 +27,8 @@ const GenerateShortUrl= async (req,res)=>{
     let ShortID = generateRandomString();
     await URL.create({
         short_url: ShortID,
-        redirect_url: body.url
+        redirect_url: body.url,
+        createdBy: req.user._id
     })
 
     const allurl = await URL.find({})
